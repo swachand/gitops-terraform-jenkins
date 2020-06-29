@@ -3,7 +3,7 @@ String credentialsId = 'awsCredentials'
 
 try {
   stage('checkout') {
-    node { (labels: 'master')
+    node { {label: 'master'}
       cleanWs()
       checkout scm
     }
@@ -11,7 +11,7 @@ try {
 
   // Run terraform init
   stage('init') {
-    node { (labels: 'master')
+    node { {label: 'master'}
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
         credentialsId: credentialsId,
@@ -27,7 +27,7 @@ try {
 
   // Run terraform plan
   stage('plan') {
-    node { (labels: 'master')
+    node { {label: 'master'}
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
         credentialsId: credentialsId,
@@ -45,7 +45,7 @@ try {
 
     // Run terraform apply
     stage('apply') {
-      node { (labels: 'master')
+      node { {label: 'master'}
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: credentialsId,
@@ -61,7 +61,7 @@ try {
 
     // Run terraform show
     stage('show') {
-      node { (labels: 'master')
+      node { {label: 'master'}
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: credentialsId,
