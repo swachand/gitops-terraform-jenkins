@@ -4,9 +4,8 @@ terraform {
     bucket = "terraform-bucket-swach"
     key    = "terraform.tfstate"
     region = "ap-south-1"
-    access_key = "AKIAZXINCLOGFV3TE44X"
-    secret_key = "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"
-    workspace_key_prefix = "pubweb/env:/"
+    access_key = ""
+    secret_key = ""
   }
 }
 
