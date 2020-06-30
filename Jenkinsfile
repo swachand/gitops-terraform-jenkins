@@ -1,7 +1,7 @@
 // Jenkinsfile
 String credentialsId = 'awsCredentials'
 
-//try {
+// try 
   stage('checkout') {
     node ('master') { 
       cleanWs()
@@ -102,4 +102,4 @@ finally {
   if (currentBuild.result == 'SUCCESS') {
     currentBuild.result = 'SUCCESS'
   }
-}
+} */
