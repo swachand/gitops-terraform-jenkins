@@ -74,16 +74,8 @@ try {
         }
       }
     }
-  }
-  currentBuild.result = 'SUCCESS'
-}
-catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
-  currentBuild.result = 'ABORTED'
-}
-catch (err) {
-  currentBuild.result = 'FAILURE'
-  throw err
-  stage('destroy') {
+    // Run Terraform Destroy
+    stage('destroy') {
       node ('master') { 
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -97,6 +89,15 @@ catch (err) {
         }
       }
     }
+  }
+  currentBuild.result = 'SUCCESS'
+}
+catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
+  currentBuild.result = 'ABORTED'
+}
+catch (err) {
+  currentBuild.result = 'FAILURE'
+  throw err
 }
 finally {
   if (currentBuild.result == 'SUCCESS') {
