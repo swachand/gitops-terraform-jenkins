@@ -83,6 +83,20 @@ catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) 
 catch (err) {
   currentBuild.result = 'FAILURE'
   throw err
+  stage('destroy') {
+      node ('master') { 
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          credentialsId: credentialsId,
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) {
+          ansiColor('xterm') {
+            sh 'terraform destroy -auto-approve'
+          }
+        }
+      }
+    }
 }
 finally {
   if (currentBuild.result == 'SUCCESS') {
