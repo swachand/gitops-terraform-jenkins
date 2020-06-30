@@ -1,7 +1,7 @@
 // Jenkinsfile
 String credentialsId = 'awsCredentials'
 
-try {
+//try {
   stage('checkout') {
     node ('master') { 
       cleanWs()
@@ -39,7 +39,7 @@ try {
       }
     }
 
-  // Run terraform plan
+/*  // Run terraform plan
   stage('plan') {
     node ('master') { 
       withCredentials([[
