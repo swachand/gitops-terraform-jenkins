@@ -25,7 +25,7 @@ try {
     }
   }
   
-  /*// Run Terraform Destroy
+  // Run Terraform Destroy
     stage('destroy') {
       node { 
         withCredentials([[
@@ -39,9 +39,9 @@ try {
           }
         }
       }
-    }*/
+    }
   
-  // Run terraform plan
+ /* // Run terraform plan
   stage('plan') {
     node { 
       withCredentials([[
@@ -91,7 +91,7 @@ try {
       }
     }
   } 
-  currentBuild.result = 'SUCCESS' 
+  currentBuild.result = 'SUCCESS' */
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   currentBuild.result = 'ABORTED'
