@@ -25,7 +25,7 @@ try {
     }
   }
   
-  // Run Terraform Destroy
+  /*// Run Terraform Destroy
     stage('destroy') {
       node { 
         withCredentials([[
@@ -39,7 +39,7 @@ try {
           }
         }
       }
-    }
+    }*/
   
   // Run terraform plan
   stage('plan') {
