@@ -3,13 +3,13 @@
 
 try {
   stage('checkout') {
-    node ('master') { 
+    node { 
       cleanWs()
       checkout scm
     }
   }
   // Run terraform init
-  stage('init') {
+  stage {
     node ('master') { 
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
@@ -23,25 +23,9 @@ try {
       }
     }
   }
-  // Run Terraform Destroy
-    stage('destroy') {
-      node ('master') { 
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          credentialsId: credentialsId,
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) {
-          ansiColor('xterm') {
-            sh 'terraform destroy -auto-approve'
-          }
-        }
-      }
-    }
-
-/*  // Run terraform plan
+  // Run terraform plan
   stage('plan') {
-    node ('master') { 
+    node { 
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
         credentialsId: credentialsId,
@@ -59,7 +43,7 @@ try {
 
     // Run terraform apply
     stage('apply') {
-      node ('master') { 
+      node { 
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: credentialsId,
@@ -75,7 +59,7 @@ try {
 
     // Run terraform show
     stage('show') {
-      node ('master') { 
+      node { 
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: credentialsId,
@@ -89,7 +73,7 @@ try {
       }
     }
   } 
-  currentBuild.result = 'SUCCESS' */
+  currentBuild.result = 'SUCCESS' 
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   currentBuild.result = 'ABORTED'
