@@ -9,7 +9,7 @@ try {
     }
   }
   
- // Run terraform init
+ // Run terraform init check
   stage ('init') {
     node { 
       withCredentials([[
