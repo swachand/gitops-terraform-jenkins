@@ -10,7 +10,7 @@ try {
   }
   // Run terraform init
   stage {
-    node ('master') { 
+    node { 
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
         credentialsId: credentialsId,
